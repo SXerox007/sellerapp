@@ -1,0 +1,80 @@
+Create a POST (REST) API in Go
+
+1. API handler JSON structure, from the request payload
+
+2. Handler writes the obtained payload to a new/updated Document (Use your favourite Document store)
+
+3. Also write timestamp of the create/update within the document
+
+
+Sample Json:
+
+
+{
+
+  "orderData": {
+
+    "sourceOrderId": "1234512345",
+
+    "items": [
+
+      {
+
+        "sku": "Business Cards",
+
+        "sourceItemId": "1234512346",
+
+        "components": [
+
+          {
+
+            "code": "Content",            
+
+            "fetch": true,
+
+            "path": "http://www.w2psite.com/businessCard.pdf"
+
+          }
+
+        ]
+
+      }
+
+    ],
+
+    "shipments": [
+
+      {
+
+        "shipTo": {
+
+          "name": "John Doe",
+
+          "companyName": "Acme",
+
+          "address1": "1234 Main St.",
+
+          "town": "Capitol",
+
+          "postcode": "12345",
+
+          "isoCountry": "US"
+
+        },
+
+        "carrier":{
+
+          "code": "fedex",
+
+          "service": "ground"
+
+        }
+
+      }
+
+    ]
+
+  }
+
+}
+
