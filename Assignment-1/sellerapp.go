@@ -1,6 +1,7 @@
 package main
 
 import (
+	"log"
 	"net/http"
 	"sellerapp/Assignment-1/collections"
 	"sellerapp/Assignment-1/models"
@@ -25,6 +26,7 @@ func OrderDataPost() func(http.ResponseWriter, *http.Request) {
 		if err == nil {
 			utils.Json("{\"success\":true, \"data\":{\"message\":\"Store Order data with success.\"}}")(w, r)
 		} else {
+			log.Println("Error:", err)
 			utils.Json("{\"success\":false, \"data\":{\"message\":\"Something went wrong.\"}}")(w, r)
 
 		}

@@ -4,7 +4,8 @@ import (
 	"context"
 	"time"
 
-	"github.com/mongodb/mongo-go-driver/mongo"
+	"go.mongodb.org/mongo-driver/mongo"
+	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
 var client *mongo.Client
@@ -15,7 +16,7 @@ const (
 )
 
 func InitDB() error {
-	client, _ = mongo.NewClient(DB_MONGODB_URL)
+	client, _ = mongo.NewClient(options.Client().ApplyURI(DB_MONGODB_URL))
 	ctx, cancel := context.WithTimeout(context.Background(), 20*time.Second)
 	defer cancel()
 	err := client.Connect(ctx)

@@ -6,7 +6,7 @@ import (
 	"sellerapp/base/db/mongodb"
 	"time"
 
-	objectid "github.com/mongodb/mongo-go-driver/bson/primitive"
+	objectid "go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 type ItemComponent struct {

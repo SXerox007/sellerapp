@@ -3,12 +3,13 @@ package collections
 import (
 	"context"
 	"errors"
+	"log"
 	"sellerapp/Assignment-1/models"
 	"sellerapp/base/db/mongodb"
 	"time"
 
-	"github.com/mongodb/mongo-go-driver/bson"
-	objectid "github.com/mongodb/mongo-go-driver/bson/primitive"
+	"go.mongodb.org/mongo-driver/bson"
+	objectid "go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 type Order struct {
@@ -71,6 +72,7 @@ func InsertOrUpdateOrder(orderId, version string, items []models.Items, shipment
 		if res, err := mongodb.CreateCollection("all_orders_details").InsertOne(context.Background(), data); err != nil {
 			return oid, err
 		} else {
+			log.Println("Error in Insert Data in all_orders_details Collection:", err)
 			oid, ok = res.InsertedID.(objectid.ObjectID)
 			if !ok {
 				return oid, errors.New("Something went wrong.")
