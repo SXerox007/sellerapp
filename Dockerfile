@@ -19,8 +19,9 @@ COPY . .
 # Build the Go app
 RUN go build -o sellerapp Assignment-1/myapplication.go Assignment-1/sellerapp.go
 
-# Expose port 50051 
-EXPOSE 50051
+# Expose port 8000 / for internal comunication 
+EXPOSE 8000
 
 # Command to run the executable
-CMD ["./sellerapp"]
+#CMD ["./sellerapp"]
+CMD ["./sellerapp","--host","0.0.0.0"]
