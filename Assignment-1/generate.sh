@@ -1,6 +1,6 @@
 
 # CURL to POST the order data
-curl -H "Content-type:application/json" -X POST 'http://:50051/sellerapp/v1/order' -d '{"orderData":{"sourceOrderId":"1234512345","items":[{"sku":"Business Cards","sourceItemId":"1234512346","components":[{"code":"Content","fetch":true,"path":"http://www.w2psite.com/businessCard.pdf"}]}],"shipments":[{"shipTo":{"name":"John Doe","companyName":"Acme","address1":"1234 Main St.","town":"Capitol","postcode":"12345","isoCountry":"US"},"carrier":{"code":"fedex","service":"ground"}}]}}' -k
+curl -H "Content-type:application/json" -X POST 'http://:50051/sellerapp/v1/order' -d '{"orderData":{"sourceOrderId":"1234512345","items":[{"sku":"Business Cards","sourceItemId":"1234512346","components":[{"code":"Content","fetch":true,"path":"http://www.w2psite.com/businessCard.pdf"}]}],"shipments":[{"shipTo":{"name":"John Doe","companyName":"Acme","address1":"1234 Main St.","town":"Capitol","postcode":"12345","isoCountry":"US"},"carrier":{"code":"fedex","service":"ground"}}]}}' -k -v
 # CURL test Get 
 curl -H "Content-type:application/json" -X GET 'http://:50051/sellerapp/v1/order'
 # initialize Go modules
@@ -29,7 +29,9 @@ docker run -d -p 50051:50051 sellerapp
 # docker run -itd --name=sellerapp-test sellerapp
 
 # MongoDB docker container
-# docker run -d -p 27017:27017 mongo
+# docker network create container-net
+# docker run -itd --name mongodb --network container-net -p 27017:27017 mongo 
+#
 docker-compose up
 docker-compose build && docker-compose up
 
@@ -74,5 +76,3 @@ openssl s_client -connect localhost:50051
 PATH=/usr/local/bin:$PATH
 hash -r
 
-#database container ip address…
-docker inspect --format="{{.NetworkSettings.Networks.$2.IPAddress}}" $1 sellerapp_mongodb_1 

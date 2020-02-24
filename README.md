@@ -9,8 +9,11 @@ Goto Assignment-1
 make debug
 ```
 
-### docker-compose
+### Run docker-compose 
+// this will run the mongodb and go server
+```
 docker-compose build && docker-compose up
+```
 
 ## How to run Docker file
 ```

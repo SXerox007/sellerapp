@@ -8,9 +8,18 @@ services:
       - "mongodata:/data/db"
     networks:
       - network1
+  sellerapp:
+      image: sellerapp
+      ports:
+      - "50051:50051"
+      networks:
+      - network1
+      depends_on:
+      - "mongodb"
 
 volumes:
    mongodata:
 
 networks:
    network1:
+    driver: bridge
