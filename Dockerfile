@@ -19,9 +19,16 @@ COPY . .
 # Build the Go app
 RUN go build -o sellerapp Assignment-1/myapplication.go Assignment-1/sellerapp.go
 
-# Expose port 8000 / for internal comunication 
-EXPOSE 8000
+# Expose port 50051 / for internal comunication 
+
+ENV PORT 50051
+RUN echo $PORT
+
+EXPOSE ${PORT}
+
+# mongodb port expose
+# EXPOSE 27017
 
 # Command to run the executable
 #CMD ["./sellerapp"]
-CMD ["./sellerapp","--host","0.0.0.0"]
+CMD ["./sellerapp"]

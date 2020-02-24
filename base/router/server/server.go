@@ -15,5 +15,5 @@ import (
 **/
 func StartServer(port string) {
 	headersOk := handlers.AllowedHeaders([]string{""})
-	http.ListenAndServe("localhost:"+port, handlers.CORS(headersOk)(router.HeadNodeRouter))
+	http.ListenAndServe(":"+port, handlers.CORS(headersOk)(router.HeadNodeRouter))
 }

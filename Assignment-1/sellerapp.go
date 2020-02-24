@@ -68,3 +68,10 @@ func refrencedApproach(body models.OrderDataRequest, version string) error {
 	}
 	return err
 }
+
+// any order data get
+func OrderDataGet() func(http.ResponseWriter, *http.Request) {
+	return func(w http.ResponseWriter, r *http.Request) {
+		utils.Json("{\"success\":true, \"data\":{\"message\":\"success.\"}}")(w, r)
+	}
+}

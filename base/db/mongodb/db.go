@@ -12,7 +12,7 @@ var client *mongo.Client
 
 const (
 	DB_NAME        = "sellerapp"
-	DB_MONGODB_URL = "mongodb://localhost:27017"
+	DB_MONGODB_URL = "mongodb://mongo:27017"
 )
 
 func InitDB() error {

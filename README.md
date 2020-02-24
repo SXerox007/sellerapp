@@ -9,6 +9,9 @@ Goto Assignment-1
 make debug
 ```
 
+### docker-compose
+docker-compose build && docker-compose up
+
 ## How to run Docker file
 ```
 //build docker file
@@ -18,7 +21,7 @@ docker build -t sellerapp  -f Dockerfile .
 docker image ls
 
 //run docker
-docker run -d -p 50051:8000 sellerapp
+docker run -d -p 50051:50051 sellerapp
 ```
 
 ## How to run Binary File
@@ -45,5 +48,8 @@ MongoDB run on mongodb://localhost:27017
 ### For Testing
 Run Curl
 ```
-curl -H "Content-type:application/json" -X POST 'http://localhost:50051/sellerapp/v1/order' -d '{"orderData":{"sourceOrderId":"1234512345","items":[{"sku":"Business Cards","sourceItemId":"1234512346","components":[{"code":"Content","fetch":true,"path":"http://www.w2psite.com/businessCard.pdf"}]}],"shipments":[{"shipTo":{"name":"John Doe","companyName":"Acme","address1":"1234 Main St.","town":"Capitol","postcode":"12345","isoCountry":"US"},"carrier":{"code":"fedex","service":"ground"}}]}}'
+curl -H "Content-type:application/json" -X POST 'http://:50051/sellerapp/v1/order' -d '{"orderData":{"sourceOrderId":"1234512345","items":[{"sku":"Business Cards","sourceItemId":"1234512346","components":[{"code":"Content","fetch":true,"path":"http://www.w2psite.com/businessCard.pdf"}]}],"shipments":[{"shipTo":{"name":"John Doe","companyName":"Acme","address1":"1234 Main St.","town":"Capitol","postcode":"12345","isoCountry":"US"},"carrier":{"code":"fedex","service":"ground"}}]}}' -k -v
+
+// test get api dummy response
+curl -H "Content-type:application/json" -X GET 'http://:50051/sellerapp/v1/order' -v
 ```
