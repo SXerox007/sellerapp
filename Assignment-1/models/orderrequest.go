@@ -40,3 +40,12 @@ type Carrier struct {
 	Code    string `json:"code" param:"code"`
 	Service string `json:"service" param:"service"`
 }
+
+type AmazonProductDetails struct {
+	Id        string   `param:"id" json:"id"`
+	Name      string   `param:"name" json:"name"`
+	ImagesURL []string `param:"images_url" json:"images_url"`
+	Desc      string   `param:"desc" json:"desc"`
+	Price     string   `param:"price" json:"price"`
+	Reviews   string   `param:"reviews" json:"reviews"`
+}

@@ -34,6 +34,7 @@ func setupRouter(env, port string) {
 	router.InitRouter()
 	sellerMux := router.SubRouter("/sellerapp")
 	sellerMux.HandleFunc("/{version}/order", OrderDataPost()).Methods("POST")
+	sellerMux.HandleFunc("/{version}/product/{marketplace}", ScrapeProductDetails()).Methods("POST")
 	sellerMux.HandleFunc("/{version}/order", OrderDataGet()).Methods("GET")
 	log.Println("Server serve at", env+":"+port)
 	server.StartServer(port)

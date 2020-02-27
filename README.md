@@ -56,3 +56,20 @@ curl -H "Content-type:application/json" -X POST 'http://:50051/sellerapp/v1/orde
 // test get api dummy response
 curl -H "Content-type:application/json" -X GET 'http://:50051/sellerapp/v1/order' -v
 ```
+
+
+## Assignment-2
+
+###  goto Assignment-2 folder
+Run the
+```
+make debug
+```
+
+### For Testing
+
+Run Curl
+```
+curl -H "Content-type:application/json" -X GET 'http://:8080/product/amazon'
+
+```

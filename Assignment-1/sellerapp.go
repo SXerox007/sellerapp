@@ -75,3 +75,25 @@ func OrderDataGet() func(http.ResponseWriter, *http.Request) {
 		utils.Json("{\"success\":true, \"data\":{\"message\":\"success.\"}}")(w, r)
 	}
 }
+
+// product details
+func ScrapeProductDetails() func(http.ResponseWriter, *http.Request) {
+	return func(w http.ResponseWriter, r *http.Request) {
+		version := mux.Vars(r)["version"]
+		var err error
+		body := &models.AmazonProductDetails{}
+		utils.ParseBody(r, body)
+
+		//Enbedded approach
+		_, err = collections.InsertOrUpdateAmazonOrder(body.Id, version, *body)
+
+		// check error if nil
+		if err == nil {
+			utils.Json("{\"success\":true, \"data\":{\"message\":\"Insert product details with success.\"}}")(w, r)
+		} else {
+			log.Println("Error:", err)
+			utils.Json("{\"success\":false, \"data\":{\"message\":\"Something went wrong.\"}}")(w, r)
+
+		}
+	}
+}

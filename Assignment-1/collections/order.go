@@ -80,5 +80,44 @@ func InsertOrUpdateOrder(orderId, version string, items []models.Items, shipment
 		}
 	}
 	return oid, nil
+}
 
+type AmazonOrderDetails struct {
+	ID            objectid.ObjectID           `bson:"_id,omitempty"`
+	SourceOrderId string                      `bson:"source_product_id"`
+	Data          models.AmazonProductDetails `bson:"data"`
+	Version       string                      `bson:"version"`
+	CaptureTime   time.Time                   `bson:"capture_time"`
+}
+
+func InsertOrUpdateAmazonOrder(orderId, version string, item models.AmazonProductDetails) (objectid.ObjectID, error) {
+	var oid objectid.ObjectID
+	var ok bool
+	data := AmazonOrderDetails{
+		SourceOrderId: orderId,
+		Data:          item,
+		Version:       version,
+		CaptureTime:   time.Now(),
+	}
+
+	// add filter to find the same order id
+	filter := bson.M{"source_product_id": orderId}
+	err := mongodb.CreateCollection("all_products").FindOne(context.Background(), filter).Decode(&AmazonOrderDetails{})
+	if err == nil {
+		// already exist update the order details
+		updateFilter := bson.M{"$set": bson.M{"data": item, "capture_time": time.Now()}}
+		_, err = mongodb.CreateCollection("all_products").UpdateOne(context.Background(), filter, updateFilter)
+
+	} else {
+		if res, err := mongodb.CreateCollection("all_products").InsertOne(context.Background(), data); err != nil {
+			return oid, err
+		} else {
+			log.Println("Error in Insert Data in all_products Collection:", err)
+			oid, ok = res.InsertedID.(objectid.ObjectID)
+			if !ok {
+				return oid, errors.New("Something went wrong.")
+			}
+		}
+	}
+	return oid, nil
 }
